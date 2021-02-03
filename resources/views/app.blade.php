@@ -6,10 +6,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <script defer src="{{ mix('js/app.js') }}"></script>
         <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <body>
         <div id="app"></div>
+
+        <script defer src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Events\WebSocketDemoEvent;
 use App\Http\Controllers\SinglePageController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +15,8 @@ use App\Http\Controllers\SinglePageController;
 |
 */
 
-// broadcast(new WebSocketDemoEvent('some data'));
+Route::get('/wstest', [SinglePageController::class, 'wstest']);
 
 Route::get('/{any}', [SinglePageController::class, 'index'])->where('any', '.*');
+
+
