@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,100;1,400&family=Montserrat:wght@700&display=swap");
+
+// Colors
+
+$primary: #3f3f37;
+$secondary: #d6a700;
+$dark: #222;
+
+// Body
+$body-bg: #f4f5f7;
+
+// Typography
+$font-family-sans-serif: "Lato", sans-serif;
+$font-size-base: 0.85rem;
+$line-height-base: 1.6;
+
+$headings-font-family: "Montserrat", sans-serif;
+$headings-font-weight: 700;
+
+$h1-font-size: $font-size-base * 1.75;
+$h2-font-size: $font-size-base * 1.5;
+$h3-font-size: $font-size-base * 1.25;
+$h4-font-size: $font-size-base * 1.125;
+$h5-font-size: $font-size-base;
+$h6-font-size: $font-size-base;
+
+// Cards
+$card-border-width: 0;
+$card-border-radius: 2px;
+
+// Toasts
+
+$toast-border-radius: 0;
+$toast-border-width: 0;
+
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;

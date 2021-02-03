@@ -1,7 +1,6 @@
 <template>
     <div id="app-layout" class="container">
-        <!-- <navigation-component class="mb-4"></navigation-component> -->
-
+        <navigation-bar class="mb-4"></navigation-bar>
         <router-view></router-view>
 
         <!-- <footer-component></footer-component> -->
@@ -9,14 +8,14 @@
 </template>
 
 <script>
-    // import NavigationComponent from '../components/NavigationComponent';
+    import NavigationBar from '../components/NavigationBar';
     // import FooterComponent from '../layouts/Footer';
 
     export default
     {
         components:
         {
-            // NavigationComponent,
+            NavigationBar,
             // FooterComponent,
         },
     }

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Events\WebSocketDemoEvent;
+use App\Http\Controllers\SinglePageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +16,6 @@ use App\Events\WebSocketDemoEvent;
 |
 */
 
-Route::get('/', function () {
-    broadcast(new WebSocketDemoEvent('some data'));
+// broadcast(new WebSocketDemoEvent('some data'));
 
-    return view('welcome');
-});
+Route::get('/{any}', [SinglePageController::class, 'index'])->where('any', '.*');

@@ -53,6 +53,7 @@ router.beforeEach((to, from, next) =>
 
     if(authRequired && !loggedIn)
     {
+        console.log('router redirects to login page...');
         return next('/login');
     }
 
