@@ -1,4 +1,4 @@
-window._ = require('lodash');
+// window._ = require('lodash');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -25,10 +25,47 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
     wsPort: 6001,
-    forceTLS: false,
+    // wssPort: 6001,
+    // forceTLS: false,
     disableStats: true,
 });
 
-window.Echo.channel('DemoChannel').listen('WebSocketDemoEvent', (e) => {
+window.Echo.channel('DemoPublicChannel').listen('WebSocketDemoPublicEvent', (e) => {
     console.log(e);
 });
+
+// listen on 'DemoPrivateChannel' channel for 'WebSocketDemoPrivateEvent' event
+// window.Echo.private('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', (e)=> {
+//     console.log(e)
+// });
+
+window.Echo.join('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', (e)=> {
+    console.log(e)
+});
+
+// class WebSocketDemoPrivateEvent implements ShouldBroadcast
+// {
+//     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+//     public $someData;
+
+//     /**
+//      * Create a new event instance.
+//      *
+//      * @return void
+//      */
+//     public function __construct($someData)
+//     {
+//         $this->someData = $someData;
+//     }
+
+//     /**
+//      * Get the channels the event should broadcast on.
+//      *
+//      * @return \Illuminate\Broadcasting\Channel|array
+//      */
+//     public function broadcastOn()
+//     {
+//         return new PrivateChannel('DemoPrivateChannel');
+//     }
+// }

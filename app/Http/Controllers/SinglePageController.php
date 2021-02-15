@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Events\WebSocketDemoEvent;
+use App\Events\WebSocketDemoPublicEvent;
+use App\Events\WebSocketDemoPrivateEvent;
+
 
 class SinglePageController extends Controller
 {
@@ -12,6 +14,10 @@ class SinglePageController extends Controller
     }
 
     public function wstest() {
-        broadcast(new WebSocketDemoEvent('wstest'));
+        broadcast(new WebSocketDemoPublicEvent('wstest public'));
+
+        broadcast(new WebSocketDemoPrivateEvent('wstest private'));
+
+        broadcast(new WebSocketDemoPrivateEvent(auth()->user(), $message))->toOthers();
     }
 }
