@@ -23,6 +23,7 @@ class WebSocketDemoPrivateEvent implements ShouldBroadcast
      */
     public function __construct($someData)
     {
+        // $this->user = $user;
         $this->someData = $someData;
     }
 
@@ -33,6 +34,7 @@ class WebSocketDemoPrivateEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+        // dd(auth()->user());
         return new PrivateChannel('DemoPrivateChannel');
     }
 }

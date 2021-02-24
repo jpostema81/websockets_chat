@@ -2141,18 +2141,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.mjs");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      waring: '',
+      wsData: '',
+      user: {}
+    };
   },
-  computed: {},
-  methods: {}
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    isAuthenticated: "AuthenticationStore/isAuthenticated"
+  })),
+  methods: {
+    getAuthenticatedUser: function getAuthenticatedUser() {
+      var _this = this;
+
+      axios.get("api/user").then(function (res) {
+        _this.warning = '';
+        _this.user = res;
+      })["catch"](function (error) {
+        _this.warning = 'error user request';
+      });
+    },
+    startListenToWebsocketsPrivateChannel: function startListenToWebsocketsPrivateChannel() {
+      var _this2 = this;
+
+      window.Echo["private"]('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', function (e) {
+        _this2.wsData = e;
+      });
+      this.wsData = 'listening to WebSockets DemoPrivateChannel';
+    }
+  }
 });
 
 /***/ }),
@@ -2271,6 +2315,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch("AuthenticationStore/login", {
         email: email,
         password: password
+      }).then(function () {
+        console.log('logged in...');
       });
     }
   })
@@ -2434,11 +2480,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "anyKey",
+  key: "anyAppKey",
   wsHost: window.location.hostname,
   wsPort: 6001,
-  // wssPort: 6001,
-  // forceTLS: false,
+  forceTLS: false,
   disableStats: true
 });
 window.Echo.channel('DemoPublicChannel').listen('WebSocketDemoPublicEvent', function (e) {
@@ -2447,10 +2492,10 @@ window.Echo.channel('DemoPublicChannel').listen('WebSocketDemoPublicEvent', func
 // window.Echo.private('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', (e)=> {
 //     console.log(e)
 // });
-
-window.Echo.join('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', function (e) {
-  console.log(e);
-}); // class WebSocketDemoPrivateEvent implements ShouldBroadcast
+// window.Echo.join('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', (e)=> {
+//     console.log(e)
+// });
+// class WebSocketDemoPrivateEvent implements ShouldBroadcast
 // {
 //     use Dispatchable, InteractsWithSockets, SerializesModels;
 //     public $someData;
@@ -2678,19 +2723,22 @@ var AuthenticationStore = {
     },
     logout: function logout(_ref3) {
       var commit = _ref3.commit;
-      // no serverside logout to keep tokens stateless.
-      // Just remove tokens from client
       commit("setStatus", "", {
         root: true
       });
       commit("setUser", "");
-      _router_index__WEBPACK_IMPORTED_MODULE_0__.default.push("/login");
+      return axios.post("api/logout").then(function (_ref4) {
+        var data = _ref4.data;
+        _router_index__WEBPACK_IMPORTED_MODULE_0__.default.push("/login");
+      })["catch"](function (error) {
+        return Promise.reject(error);
+      });
     },
-    resetPassword: function resetPassword(_ref4, _ref5) {
-      var commit = _ref4.commit,
-          state = _ref4.state;
-      var password = _ref5.password,
-          resetToken = _ref5.resetToken;
+    resetPassword: function resetPassword(_ref5, _ref6) {
+      var commit = _ref5.commit,
+          state = _ref5.state;
+      var password = _ref6.password,
+          resetToken = _ref6.resetToken;
       commit("setStatus", "resetting", {
         root: true
       });
@@ -2710,10 +2758,10 @@ var AuthenticationStore = {
         return Promise.reject(e);
       });
     },
-    requestPasswordReset: function requestPasswordReset(_ref6, _ref7) {
-      var commit = _ref6.commit,
-          state = _ref6.state;
-      var email = _ref7.email;
+    requestPasswordReset: function requestPasswordReset(_ref7, _ref8) {
+      var commit = _ref7.commit,
+          state = _ref7.state;
+      var email = _ref8.email;
       commit("setStatus", "loading", {
         root: true
       });
@@ -55615,7 +55663,50 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _vm.isAuthenticated
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.getAuthenticatedUser($event)
+              }
+            }
+          },
+          [_vm._v("\n          Get Authenticated User\n      ")]
+        )
+      : _vm._e(),
+    _vm._v(
+      "\n\n      " +
+        _vm._s(_vm.waring) +
+        "\n      " +
+        _vm._s(_vm.user) +
+        "\n\n      "
+    ),
+    _vm.isAuthenticated
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.startListenToWebsocketsPrivateChannel($event)
+              }
+            }
+          },
+          [
+            _vm._v(
+              "\n          Start listening to WebSockets private channel\n      "
+            )
+          ]
+        )
+      : _vm._e(),
+    _vm._v("\n\n      " + _vm._s(_vm.wsData) + "\n")
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

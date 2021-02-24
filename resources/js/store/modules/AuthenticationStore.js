@@ -35,12 +35,17 @@ export const AuthenticationStore = {
         });
     },
     logout: function ({ commit }) {
-      // no serverside logout to keep tokens stateless.
-      // Just remove tokens from client
       commit("setStatus", "", { root: true });
       commit("setUser", "");
 
-      router.push("/login");
+      return axios
+        .post("api/logout")
+        .then(({ data }) => {
+            router.push("/login");
+        })
+        .catch((error) => {
+            return Promise.reject(error);
+        });
     },
     resetPassword({ commit, state }, { password, resetToken }) {
       commit("setStatus", "resetting", { root: true });

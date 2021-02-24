@@ -93,10 +93,12 @@ export default {
       logout: "logout",
     }),
     handleSubmit() {
-      this.submitted = true;
-      const { email, password } = this;
+        this.submitted = true;
+        const { email, password } = this;
 
-      this.$store.dispatch("AuthenticationStore/login", { email, password });
+        this.$store.dispatch("AuthenticationStore/login", { email, password }).then(() => {
+                console.log('logged in...');
+        });
     },
   },
 };

@@ -18,4 +18,30 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, \Closure $next)
+    {
+        // dd($this->auth->user());
+        // if ($this->auth->guest())
+        // {
+        //     if ($request->ajax())
+        //     {
+        //         return response('Unauthorized.', 401);
+        //     }
+        //     else
+        //     {
+        //         return redirect()->guest('auth/login');
+        //     }
+        // }
+
+        return $next($request);
+    }
+
 }

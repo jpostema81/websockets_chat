@@ -51,7 +51,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        $this->guard()->logout();
+        // You have to explicitly use the web guard to logout.
+        Auth::guard('web')->logout();
         return response()->json(['message' => 'Je bent nu uitgelogd']);
     }
 

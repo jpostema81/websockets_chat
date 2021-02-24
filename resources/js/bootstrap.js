@@ -25,8 +25,7 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     wsHost: window.location.hostname,
     wsPort: 6001,
-    // wssPort: 6001,
-    // forceTLS: false,
+    forceTLS: false,
     disableStats: true,
 });
 
@@ -39,9 +38,9 @@ window.Echo.channel('DemoPublicChannel').listen('WebSocketDemoPublicEvent', (e) 
 //     console.log(e)
 // });
 
-window.Echo.join('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', (e)=> {
-    console.log(e)
-});
+// window.Echo.join('DemoPrivateChannel').listen('WebSocketDemoPrivateEvent', (e)=> {
+//     console.log(e)
+// });
 
 // class WebSocketDemoPrivateEvent implements ShouldBroadcast
 // {

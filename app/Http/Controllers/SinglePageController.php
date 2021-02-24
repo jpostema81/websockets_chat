@@ -18,6 +18,6 @@ class SinglePageController extends Controller
 
         broadcast(new WebSocketDemoPrivateEvent('wstest private'));
 
-        broadcast(new WebSocketDemoPrivateEvent(auth()->user(), $message))->toOthers();
+        // broadcast(new WebSocketDemoPrivateEvent(auth()->user(), "test"))->toOthers();
     }
 }

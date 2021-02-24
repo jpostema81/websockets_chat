@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Broadcast;
 // however, in order to subscribe to a private channel, a user must be authenticated and authorized to listen on
 // that channel.
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+Broadcast::channel('DemoPrivateChannel', function ($user, $id) {
     return true;
     // return (int) $user->id === (int) $id;
 });
