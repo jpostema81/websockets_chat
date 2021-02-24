@@ -16,7 +16,7 @@ class BroadcastServiceProvider extends ServiceProvider
     {
         // Broadcast::routes();
         // In order to use our API / Sanctum routes with broadcasting routes, we must first update our
-        // BroadcastServiceProvider to use "auth:sanctum" instead of the default "web".
+        // BroadcastServiceProvider to use "auth:sanctum" instead of the default"web".
         Broadcast::routes(["middleware" => ["auth:sanctum"]]);
         // https://stackoverflow.com/questions/46438199/how-can-i-separate-broadcasting-routes-authorization-middleware-in-laravel
 

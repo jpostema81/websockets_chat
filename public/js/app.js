@@ -55335,11 +55335,11 @@ var render = function() {
                   !_vm.isAuthenticated
                     ? [
                         _c("b-nav-item", { attrs: { to: "/login" } }, [
-                          _vm._v(" Inloggen ")
+                          _vm._v(" Login")
                         ]),
                         _vm._v(" "),
                         _c("b-nav-item", { attrs: { to: "/register" } }, [
-                          _vm._v("Registreren")
+                          _vm._v("Register")
                         ])
                       ]
                     : _c(
@@ -55750,7 +55750,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "sr-only", attrs: { for: "username" } },
-                [_vm._v("Emailadres")]
+                [_vm._v("Email")]
               ),
               _vm._v(" "),
               _c("input", {
@@ -55800,7 +55800,7 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "sr-only", attrs: { for: "password" } },
-                [_vm._v("Wachtwoord")]
+                [_vm._v("Password")]
               ),
               _vm._v(" "),
               _c("input", {
@@ -55880,7 +55880,7 @@ var render = function() {
                     staticClass: "btn btn-link mt-3",
                     attrs: { to: "/register" }
                   },
-                  [_vm._v("Registreren")]
+                  [_vm._v("Register")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -55889,7 +55889,7 @@ var render = function() {
                     staticClass: "btn btn-link mt-3",
                     attrs: { to: "/password_reset" }
                   },
-                  [_vm._v("Wachtwoord Vergeten?")]
+                  [_vm._v("Forgot password?")]
                 )
               ],
               1

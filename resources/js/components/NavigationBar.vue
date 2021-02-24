@@ -22,8 +22,8 @@
 
         <b-navbar-nav class="ml-auto">
           <template v-if="!isAuthenticated">
-            <b-nav-item to="/login"> Inloggen </b-nav-item>
-            <b-nav-item to="/register">Registreren</b-nav-item>
+            <b-nav-item to="/login"> Login</b-nav-item>
+            <b-nav-item to="/register">Register</b-nav-item>
           </template>
 
           <b-nav-item-dropdown v-else right>
